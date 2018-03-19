@@ -6,12 +6,7 @@
 </template>
 
 <script>
-import Firebase from 'firebase'
-
-// Initialize Firebase
-const app = Firebase.app()
-const db = app.firestore()
-const eventsRef = db.collection('events')
+import db from '../firebaseInit'
 
 export default {
   name: 'NewEvent',
@@ -21,9 +16,6 @@ export default {
 
   props: {
   },
-
-  // firebase: {
-  // },
 
   computed: {
   },
@@ -38,7 +30,7 @@ export default {
       let event = {
         time: Date.now()
       }
-      eventsRef.doc().set(event)
+      db.collection('events').doc().set(event)
     }
   },
 

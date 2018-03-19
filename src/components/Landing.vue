@@ -14,9 +14,6 @@ export default {
   props: {
   },
 
-  // firebase: {
-  // },
-
   computed: {
   },
 

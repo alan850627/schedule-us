@@ -5,12 +5,7 @@
 </template>
 
 <script>
-import Firebase from 'firebase'
-
-// Initialize Firebase
-const app = Firebase.app()
-const db = app.firestore()
-const eventsRef = db.collection('events')
+import db from '../firebaseInit'
 
 export default {
   name: 'EventDashboard',
@@ -21,21 +16,17 @@ export default {
   props: {
   },
 
-  firebase: {
-    event: {
-      source
-    }
+  firestore: {
+    event: db.collection('events').doc('M9Jb5PQDuDUtVZcq6opV')
   },
 
   computed: {
-    eventRef: function () {
-      return eventsRef.doc(this.eventId)
-    }
   },
 
   data () {
     return {
-      eventId: ''
+      eventId: '',
+      event: {}
     }
   },
 
