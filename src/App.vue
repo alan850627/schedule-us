@@ -19,8 +19,8 @@ let config = {
   storageBucket: 'schedule-us-689d0.appspot.com',
   messagingSenderId: '685116488347'
 }
-firebase.initializeApp(config)
 // Here we are initializing the Firebase connection.
+firebase.initializeApp(config)
 
 export default {
   name: 'App'
