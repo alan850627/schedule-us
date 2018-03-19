@@ -3,14 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import firebase from 'firebase'
-
-var serviceAccount = require("../auth/firebase-service-key.json");
-
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL: "https://schedule-us-689d0.firebaseio.com"
-});
 
 Vue.config.productionTip = false
 
