@@ -23,6 +23,11 @@ export default {
   },
 
   props: {
+    id: {
+      required: true,
+      type: String,
+      default: ''
+    }
   },
 
   computed: {
@@ -35,22 +40,10 @@ export default {
   },
 
   methods: {
-    // May move/update this.
-    makeTable: function (table = {}, startTime = 1523336400000, length = 3600000, days = 3) {
-      let n = 86400000 * days / length
-      for (let i = 0; i < n; i += 1) {
-        table[startTime] = {
-          startTime: startTime,
-          length: length,
-          response: {}
-        }
-        startTime += length
-      }
-      return table
-    }
   },
 
   mounted () {
+    this.$bind('timeTable', db.collection('time-table').doc(this.id))
   }
 }
 </script>

@@ -1,18 +1,18 @@
 <template>
   <div class="test">
-    <chat-box id="u9juj1XHLE3iPmVbRvGo"></chat-box>
+    <time-selector id="LNxvLP8ahJdMyLFY1b5c"></time-selector>
   </div>
 </template>
 
 <script>
-import TimeTable from './calendar/TimeTable'
+import TimeSelector from './calendar/TimeSelector'
 import ChatBox from './chat/ChatBox'
 
 export default {
   name: 'Test',
 
   components: {
-    TimeTable,
+    TimeSelector,
     ChatBox
   },
 
