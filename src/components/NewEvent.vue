@@ -31,6 +31,17 @@ export default {
         time: Date.now()
       }
       db.collection('events').doc().set(event)
+    },
+
+    // May move/update this.
+    newChatBox: function () {
+      let chatBox = {}
+      chatBox[`${Date.now()}`] = {
+        username: 'System',
+        message: 'Chat created.'
+      }
+
+      db.collection('chat-boxes').doc().set(chatBox)
     }
   },
 

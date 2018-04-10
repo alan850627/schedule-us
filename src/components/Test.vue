@@ -1,17 +1,19 @@
 <template>
   <div class="test">
-    <time-table id="LNxvLP8ahJdMyLFY1b5c"></time-table>
+    <chat-box id="u9juj1XHLE3iPmVbRvGo"></chat-box>
   </div>
 </template>
 
 <script>
 import TimeTable from './calendar/TimeTable'
+import ChatBox from './chat/ChatBox'
 
 export default {
   name: 'Test',
 
   components: {
-    TimeTable
+    TimeTable,
+    ChatBox
   },
 
   props: {

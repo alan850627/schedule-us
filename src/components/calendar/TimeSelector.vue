@@ -35,6 +35,7 @@ export default {
   },
 
   methods: {
+    // May move/update this.
     makeTable: function (table = {}, startTime = 1523336400000, length = 3600000, days = 3) {
       let n = 86400000 * days / length
       for (let i = 0; i < n; i += 1) {

@@ -1,6 +1,6 @@
 <template>
   <div class="chat-message">
-    <h1>Schedule Us!</h1>
+    {{ username }}: {{ message }}
   </div>
 </template>
 
@@ -12,6 +12,14 @@ export default {
   },
 
   props: {
+    username: {
+      type: String,
+      default: 'Anonymous'
+    },
+    message: {
+      type: String,
+      default: 'Default Message.'
+    }
   },
 
   computed: {

@@ -1,6 +1,11 @@
 <template>
   <div class="chat-box">
-    <h1>Schedule Us!</h1>
+    <div v-for="(msg, time) in chatBox" v-bind:key="time">
+      <chat-message
+        :username="msg.username"
+        :message="msg.message">
+      </chat-message>
+    </div>
   </div>
 </template>
 
@@ -36,7 +41,7 @@ export default {
   },
 
   mounted () {
-    this.$bind('chatBox', db.collection('chat-box').doc(this.id))
+    this.$bind('chatBox', db.collection('chat-boxes').doc(this.id))
   }
 }
 </script>
