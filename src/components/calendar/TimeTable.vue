@@ -1,11 +1,14 @@
 <template>
   <div class="time-table">
-    <div v-for="timeSlot in timeTable" v-bind:key="timeSlot.startTime">
-      <time-slot
-        :startTime="timeSlot.startTime"
-        :length="timeSlot.length"
-        :responses="timeSlot.reponses">
-      </time-slot>
+    <div v-for="(arr, day) in daySeparated" v-bind:key="day"
+      class="column">
+      <div v-for="timeSlot in arr" v-bind:key="timeSlot.startTime">
+        <time-slot
+          :startTime="timeSlot.startTime"
+          :length="timeSlot.length"
+          :responses="timeSlot.reponses">
+        </time-slot>
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +16,7 @@
 <script>
 import db from '../../firebaseInit'
 import TimeSlot from './TimeSlot'
+import moment from 'moment'
 
 export default {
   name: 'TimeTable',
@@ -30,6 +34,20 @@ export default {
   },
 
   computed: {
+    daySeparated: function () {
+      let columns = {}
+      Object.keys(this.timeTable).forEach(timestamp => {
+        let timeslot = this.timeTable[timestamp]
+        let key = moment(timeslot.startTime).format('L')
+        if (columns[key]) {
+          columns[key].push(timeslot)
+        } else {
+          columns[key] = []
+          columns[key].push(timeslot)
+        }
+      })
+      return columns
+    }
   },
 
   data () {
@@ -49,5 +67,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.column {
+  float: left;
+  width: 10%;
+}
 </style>

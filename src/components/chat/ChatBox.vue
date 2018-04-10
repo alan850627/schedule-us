@@ -5,13 +5,22 @@
 </template>
 
 <script>
+import db from '../../firebaseInit'
+import ChatMessage from './ChatMessage'
+
 export default {
   name: 'ChatBox',
 
   components: {
+    ChatMessage
   },
 
   props: {
+    id: {
+      required: true,
+      type: String,
+      default: ''
+    }
   },
 
   computed: {
@@ -19,6 +28,7 @@ export default {
 
   data () {
     return {
+      chatBox: {}
     }
   },
 
@@ -26,6 +36,7 @@ export default {
   },
 
   mounted () {
+    this.$bind('chatBox', db.collection('chat-box').doc(this.id))
   }
 }
 </script>
