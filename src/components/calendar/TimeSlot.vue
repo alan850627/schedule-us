@@ -22,6 +22,10 @@ export default {
     length: {
       type: Number,
       default: 3600000
+    },
+    responses: {
+      type: Object,
+      default: () => { return {} }
     }
   },
 

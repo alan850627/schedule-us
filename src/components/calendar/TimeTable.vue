@@ -1,16 +1,24 @@
 <template>
   <div class="time-table">
-    <h1>Time-Table</h1>
+    <div v-for="timeSlot in timeTable" v-bind:key="timeSlot.startTime">
+      <time-slot
+        :startTime="timeSlot.startTime"
+        :length="timeSlot.length"
+        :responses="timeSlot.reponses">
+      </time-slot>
+    </div>
   </div>
 </template>
 
 <script>
 import db from '../../firebaseInit'
+import TimeSlot from './TimeSlot'
 
 export default {
   name: 'TimeTable',
 
   components: {
+    TimeSlot
   },
 
   props: {
