@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import db from '../../firebaseInit'
+
 export default {
   name: 'TimeTable',
 
@@ -12,6 +14,11 @@ export default {
   },
 
   props: {
+    id: {
+      required: true,
+      type: String,
+      default: ''
+    }
   },
 
   computed: {
@@ -19,6 +26,7 @@ export default {
 
   data () {
     return {
+      timeTable: {}
     }
   },
 
@@ -26,6 +34,7 @@ export default {
   },
 
   mounted () {
+    this.$bind('timeTable', db.collection('time-table').doc(this.id))
   }
 }
 </script>

@@ -16,7 +16,8 @@ export default {
   props: {
     startTime: {
       required: true,
-      type: Number
+      type: Number,
+      default: 0
     },
     length: {
       type: Number,
