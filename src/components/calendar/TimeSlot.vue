@@ -14,6 +14,14 @@ export default {
   },
 
   props: {
+    username: {
+      type: String,
+      default: ''
+    },
+    selectable: {
+      type: Boolean,
+      default: false
+    },
     startTime: {
       required: true,
       type: Number,

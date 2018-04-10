@@ -1,7 +1,6 @@
 <template>
   <div class="time-table">
-    <div v-for="(arr, day) in daySeparated" v-bind:key="day"
-      class="column">
+    <div v-for="(arr, day) in daySeparated" v-bind:key="day" class="column">
       <div v-for="timeSlot in arr" v-bind:key="timeSlot.startTime">
         <time-slot
           :startTime="timeSlot.startTime"

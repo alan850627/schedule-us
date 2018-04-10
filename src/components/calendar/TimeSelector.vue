@@ -2,6 +2,7 @@
   <div class="time-selector">
     <div v-for="timeSlot in timeTable" v-bind:key="timeSlot.startTime">
       <time-slot
+        :selectable="true"
         :startTime="timeSlot.startTime"
         :length="timeSlot.length"
         :responses="timeSlot.reponses">
