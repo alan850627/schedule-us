@@ -1,14 +1,17 @@
 <template>
-  <div class="time-table">
-    <h1>Time-Table</h1>
+  <div class="test">
+    <time-table></time-table>
   </div>
 </template>
 
 <script>
+import TimeTable from './calendar/TimeTable'
+
 export default {
-  name: 'TimeTable',
+  name: 'Test',
 
   components: {
+    TimeTable
   },
 
   props: {

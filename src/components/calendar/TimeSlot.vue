@@ -1,10 +1,12 @@
 <template>
   <div class="time-slot">
-    <h1>Schedule Us!</h1>
+    {{ displayTime }}
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'TimeSlot',
 
@@ -12,9 +14,20 @@ export default {
   },
 
   props: {
+    startTime: {
+      required: true,
+      type: Number
+    },
+    length: {
+      type: Number,
+      default: 3600000
+    }
   },
 
   computed: {
+    displayTime: function () {
+      return moment(this.startTime).format('LT')
+    }
   },
 
   data () {

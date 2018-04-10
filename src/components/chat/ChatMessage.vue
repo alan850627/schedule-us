@@ -1,12 +1,12 @@
 <template>
-  <div class="time-table">
-    <h1>Time-Table</h1>
+  <div class="chat-message">
+    <h1>Schedule Us!</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TimeTable',
+  name: 'ChatMessage',
 
   components: {
   },
