@@ -40,6 +40,18 @@ export default {
   computed: {
     displayTime: function () {
       return moment(this.startTime).format('LT')
+    },
+
+    status: function () {
+      let status = 'available'
+      Object.keys(this.responses).forEach(username => {
+        if (this.responses[username] === 'maybe') {
+          status = 'maybe'
+        } else if (this.responses[username] === 'no') {
+          status = 'no'
+        }
+      })
+      return status
     }
   },
 
