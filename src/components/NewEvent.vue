@@ -1,17 +1,3 @@
-<!--<template>
-  <div class="new-event">
-    <h1>Create a new event!</h1>
-    <form action="/action_page.php">
-      Your Name:<br>
-  <input type="text" name="firstname" value="">
-</form>
-    <br>
-    <h2>Add Participants</h2>
-    <button v-on:click="submit()">Submit</button>
-  </div>
-</template>
--->
-
 <template>
   <div class="new-event">
     <h1 style = "text-align:center;"> Create a new event!</h1>
@@ -56,6 +42,8 @@
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
+
+    <a v-if="eventLink" :href="eventLink">{{ eventLink }}</a>
   </div>
 </template>
 
@@ -80,49 +68,52 @@ export default {
     return {
       form: {
         eventname: '',
-        descrip: null,
-        email: '',
-        checked: []
+        descrip: '',
+        email: ''
       },
-      show: true
+      eventLink: ''
     }
   },
 
   methods: {
-    onSubmit (evt) {
-      evt.preventDefault()
-      alert(JSON.stringify(this.form))
+    onSubmit: function (evt) {
+      let timeTableRef = this.makeTimeTable(Date.now(), 3600000, 3)
+      let chatRef = this.makeChatBox()
+      let event = {
+        name: this.form.eventname,
+        descirption: this.form.descrip,
+        hostEmail: this.form.email,
+        timeTableId: timeTableRef.id,
+        chatId: chatRef.id
+      }
+      let eventRef = db.collection('events').doc()
+      eventRef.set(event)
+      this.eventLink = `/event/${eventRef.id}`
     },
-    onReset (evt) {
+    onReset: function (evt) {
       evt.preventDefault()
       /* Reset our form values */
       this.form.email = ''
       this.form.name = ''
-      this.form.checked = []
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false
-      this.$nextTick(() => { this.show = true })
-    },
-    submit: function () {
-      let event = {
-        time: Date.now()
-      }
-      db.collection('events').doc().set(event)
+      this.form.descrip = ''
     },
 
     // May move/update this.
-    newChatBox: function () {
+    makeChatBox: function () {
       let chatBox = {}
       chatBox[`${Date.now()}`] = {
         username: 'System',
         message: 'Chat created.'
       }
 
-      db.collection('chat-boxes').doc().set(chatBox)
+      let chatref = db.collection('chat-boxes').doc()
+      chatref.set(chatBox)
+      return chatref
     },
 
     // May move/update this.
-    makeTable: function (table = {}, startTime = 1523336400000, length = 3600000, days = 3) {
+    makeTimeTable: function (startTime, length = 3600000, days = 3) {
+      let table = {}
       let n = 86400000 * days / length
       for (let i = 0; i < n; i += 1) {
         table[startTime] = {
@@ -132,7 +123,9 @@ export default {
         }
         startTime += length
       }
-      return table
+      let timeref = db.collection('time-table').doc()
+      timeref.set(table)
+      return timeref
     }
   },
 
