@@ -35,7 +35,7 @@ export default {
       type: Number,
       default: 3600000
     },
-    responses: {
+    response: {
       type: Object,
       default: () => { return {} }
     }
@@ -47,11 +47,16 @@ export default {
     },
 
     status: function () {
+      let usernames = Object.keys(this.response)
+      if (usernames.length === 0) {
+        return 'no'
+      }
+
       let status = 'yes'
-      Object.keys(this.responses).forEach(username => {
-        if (this.responses[username] === 'maybe') {
+      usernames.forEach(username => {
+        if (this.response[username] === 'maybe') {
           status = 'maybe'
-        } else if (this.responses[username] === 'no') {
+        } else if (this.response[username] === 'no') {
           status = 'no'
         }
       })
@@ -77,12 +82,12 @@ export default {
       }
     },
     cycleStatus: function () {
-      if (!this.responses[this.username] || this.responses[this.username] === 'no') {
-        this.$set(this.responses, this.username, 'yes')
-      } else if (this.responses[this.username] === 'yes') {
-        this.$set(this.responses, this.username, 'maybe')
-      } else if (this.responses[this.username] === 'maybe') {
-        this.$set(this.responses, this.username, 'no')
+      if (!this.response[this.username] || this.response[this.username] === 'no') {
+        this.$set(this.response, this.username, 'yes')
+      } else if (this.response[this.username] === 'yes') {
+        this.$set(this.response, this.username, 'maybe')
+      } else if (this.response[this.username] === 'maybe') {
+        this.$set(this.response, this.username, 'no')
       }
       this.changeFlag = true
     }

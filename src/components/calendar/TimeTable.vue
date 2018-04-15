@@ -8,10 +8,11 @@
           :mouseDown="mouseDown"
           :startTime="timeSlot.startTime"
           :length="timeSlot.length"
-          :responses="timeSlot.reponses">
+          :response="timeSlot.response">
         </time-slot>
       </div>
     </div>
+    <button v-on:click="submit()">Submit</button>
   </div>
 </template>
 
@@ -69,7 +70,12 @@ export default {
 
   methods: {
     submit: function () {
-
+      Object.keys(this.timeTable).forEach(timestamp => {
+        if (!this.timeTable[timestamp].response[this.username]) {
+          this.timeTable[timestamp].response[this.username] = 'no'
+        }
+      })
+      db.collection('time-table').doc(this.id).set(this.timeTable)
     }
   },
 
