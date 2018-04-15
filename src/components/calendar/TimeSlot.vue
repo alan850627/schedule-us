@@ -22,6 +22,10 @@ export default {
       type: String,
       default: ''
     },
+    viewSingle: {
+      type: Boolean,
+      default: false
+    },
     editable: {
       type: Boolean,
       default: false
@@ -50,6 +54,10 @@ export default {
       let usernames = Object.keys(this.response)
       if (usernames.length === 0) {
         return 'no'
+      }
+
+      if (this.viewSingle) {
+        return this.response[this.username]
       }
 
       let status = 'yes'
@@ -111,9 +119,11 @@ export default {
 .yes {
   background:green
 }
+
 .no {
   background:white
 }
+
 .maybe {
   background:yellow
 }

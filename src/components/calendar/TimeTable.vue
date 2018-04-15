@@ -91,4 +91,5 @@ export default {
   float: left;
   width: 10%;
 }
+
 </style>
