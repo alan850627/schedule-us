@@ -1,28 +1,47 @@
 <template>
   <div class="event-dashboard">
     <h1>Event Dashboard</h1>
+
+    <div v-if="validEvent">
+      <time-table
+        :id="event.timeTableId"
+        :editable="false"
+        username="alanolen">
+      </time-table>
+
+      <chat-box
+        :id="event.chatId">
+      </chat-box>
+    </div>
   </div>
 </template>
 
 <script>
 import db from '../firebaseInit'
+import TimeTable from './calendar/TimeTable'
+import ChatBox from './chat/ChatBox'
 
 export default {
   name: 'EventDashboard',
 
   components: {
+    TimeTable,
+    ChatBox
   },
 
   props: {
   },
 
   computed: {
+    validEvent: function () {
+      return Object.keys(this.event).length > 0
+    }
   },
 
   data () {
     return {
       eventId: '',
-      event: {}
+      event: () => { return {} }
     }
   },
 
