@@ -60,43 +60,9 @@
 </template>
 
 <script>
-// import db from '../firebaseInit'
+import db from '../firebaseInit'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-export default {
-  data () {
-    return {
-      form: {
-        eventname: '',
-        descrip: null,
-        email: '',
-        checked: []
-      },
-      show: true
-    }
-  },
-  methods: {
-    onSubmit (evt) {
-      evt.preventDefault()
-      alert(JSON.stringify(this.form))
-    },
-    onReset (evt) {
-      evt.preventDefault()
-      /* Reset our form values */
-      this.form.email = ''
-      this.form.name = ''
-      this.form.checked = []
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false
-      this.$nextTick(() => { this.show = true })
-    }
-  }
-}
-</script>
-
-<!-- b-form-1.vue -->
-<!--
-<script>
 
 export default {
   name: 'NewEvent',
@@ -112,10 +78,31 @@ export default {
 
   data () {
     return {
+      form: {
+        eventname: '',
+        descrip: null,
+        email: '',
+        checked: []
+      },
+      show: true
     }
   },
 
   methods: {
+    onSubmit (evt) {
+      evt.preventDefault()
+      alert(JSON.stringify(this.form))
+    },
+    onReset (evt) {
+      evt.preventDefault()
+      /* Reset our form values */
+      this.form.email = ''
+      this.form.name = ''
+      this.form.checked = []
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false
+      this.$nextTick(() => { this.show = true })
+    },
     submit: function () {
       let event = {
         time: Date.now()
@@ -153,8 +140,6 @@ export default {
   }
 }
 </script>
--->
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>
