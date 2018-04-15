@@ -1,18 +1,18 @@
 <template>
   <div class="test">
-    <time-selector id="LNxvLP8ahJdMyLFY1b5c"></time-selector>
+    <time-table id="LNxvLP8ahJdMyLFY1b5c" :editable="true" username="alanolen"></time-table>
   </div>
 </template>
 
 <script>
-import TimeSelector from './calendar/TimeSelector'
+import TimeTable from './calendar/TimeTable'
 import ChatBox from './chat/ChatBox'
 
 export default {
   name: 'Test',
 
   components: {
-    TimeSelector,
+    TimeTable,
     ChatBox
   },
 

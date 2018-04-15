@@ -1,8 +1,11 @@
 <template>
-  <div class="time-table">
+  <div class="time-table" v-on:mousedown="mouseDown=true" v-on:mouseup="mouseDown=false">
     <div v-for="(arr, day) in daySeparated" v-bind:key="day" class="column">
       <div v-for="timeSlot in arr" v-bind:key="timeSlot.startTime">
         <time-slot
+          :username="username"
+          :editable="editable"
+          :mouseDown="mouseDown"
           :startTime="timeSlot.startTime"
           :length="timeSlot.length"
           :responses="timeSlot.reponses">
@@ -25,6 +28,14 @@ export default {
   },
 
   props: {
+    username: {
+      type: String,
+      default: ''
+    },
+    editable: {
+      type: Boolean,
+      default: false
+    },
     id: {
       required: true,
       type: String,
@@ -51,11 +62,15 @@ export default {
 
   data () {
     return {
-      timeTable: {}
+      timeTable: {},
+      mouseDown: false
     }
   },
 
   methods: {
+    submit: function () {
+
+    }
   },
 
   mounted () {
