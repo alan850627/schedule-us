@@ -1,4 +1,4 @@
-<template>
+<template id = "ChatBoxMessage">
   <div class="chat-box">
     <div v-for="(msg, time) in chatBox" v-bind:key="time">
       <chat-message
@@ -6,6 +6,15 @@
         :message="msg.message">
       </chat-message>
     </div>
+    <div>
+      <b-form-input v-model="chatMessage"
+                    type="text"
+                    placeholder="Enter your message"></b-form-input>
+      <!-- <p>Value: {{ chatMessage }}</p> -->
+    </div>
+    <div id ="SubmitMsgButton">
+       <b-button>I am a Button</b-button>
+    </div>   
   </div>
 </template>
 
@@ -33,7 +42,8 @@ export default {
 
   data () {
     return {
-      chatBox: {}
+      chatBox: {},
+      chatMessage: ''
     }
   },
 
@@ -48,5 +58,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+div.chat-box{
+  position: absolute;
+  right: 100px;
+  max-width: 500px;
+}
+
+#SubmitMsgButton{
+  padding-top: 10px;
+}
 
 </style>
