@@ -14,7 +14,7 @@
     </div>
     <div id ="SubmitMsgButton">
        <b-button>I am a Button</b-button>
-    </div>   
+    </div>
   </div>
 </template>
 
