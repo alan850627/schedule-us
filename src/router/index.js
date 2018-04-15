@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Landing from '@/components/Landing'
 import NewEvent from '@/components/NewEvent'
 import EventDashboard from '@/components/EventDashboard'
+import EventCreated from '@/components/EventCreated'
 import Test from '@/components/Test'
 
 Vue.use(Router)
@@ -23,6 +24,11 @@ export default new Router({
       path: '/event/:eventId',
       name: 'EventDashboard',
       component: EventDashboard
+    },
+    {
+      path: '/event-created/:eventId',
+      name: 'EventCreated',
+      component: EventCreated
     },
     {
       path: '/test',
