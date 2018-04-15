@@ -12,7 +12,7 @@
         </time-slot>
       </div>
     </div>
-    <button v-on:click="submit()">Submit</button>
+    <button v-if="editable" v-on:click="submit()">Submit</button>
   </div>
 </template>
 

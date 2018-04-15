@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <time-table id="LNxvLP8ahJdMyLFY1b5c" :editable="true" username="alanolen"></time-table>
+    <time-table id="LNxvLP8ahJdMyLFY1b5c" :editable="false" username="alanolen"></time-table>
   </div>
 </template>
 
