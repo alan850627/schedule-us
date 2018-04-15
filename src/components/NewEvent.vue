@@ -21,7 +21,7 @@
                     label="Event Name:"
                     label-for="exampleInput1">
         <b-form-input id="exampleInput1"
-                      type="email"
+                      type="text"
                       v-model="form.eventname"
                       required>
         </b-form-input>
@@ -30,7 +30,7 @@
                     label="Event Description:"
                     label-for="exampleInput2">
         <b-form-input id="exampleInput2"
-                      type="email"
+                      type="text"
                       v-model="form.descrip"
                       required>
         </b-form-input>
@@ -48,13 +48,11 @@
                     label="Email:"
                     label-for="exampleInput4">
         <b-form-input id="exampleInput4"
-                      type="text"
+                      type="email"
                       v-model="form.email"
                       required>
         </b-form-input>
       </b-form-group>
-      
-      
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
@@ -62,7 +60,7 @@
 </template>
 
 <script>
-import db from '../firebaseInit';
+// import db from '../firebaseInit'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 export default {
