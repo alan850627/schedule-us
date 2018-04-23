@@ -6,12 +6,13 @@
           <time-table
             :id="event.timeTableId"
             :editable="false"
-            username="alanolen">
+            :username="username">
           </time-table>
         </b-col>
         <b-col sm="4">
           <chat-box
-            :id="event.chatId">
+            :id="event.chatId"
+            :username="username">
           </chat-box>
         </b-col>
       </b-row>
@@ -33,6 +34,10 @@ export default {
   },
 
   props: {
+    username: {
+      type: String,
+      default: ''
+    }
   },
 
   computed: {

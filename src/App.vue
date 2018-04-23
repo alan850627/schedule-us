@@ -71,7 +71,11 @@ export default {
 
   mounted () {
     this.rawUsername = cookies.get('schedule.us.username')
-    this.username = this.rawUsername.trim()
+    if (this.rawUsername) {
+      this.username = this.rawUsername.trim()
+    } else {
+      this.username = ''
+    }
   }
 }
 </script>

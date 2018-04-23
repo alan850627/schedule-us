@@ -1,6 +1,6 @@
 <template>
-  <div class="chat-message" :title="timeAgo">
-    {{ username }}: {{ message }}
+  <div class="chat-message hanging-indent" :title="timeAgo">
+    <b>{{ username }}</b>: {{ message }}
     <sup><small> {{timeAgo}}</small></sup>
   </div>
 </template>
@@ -49,5 +49,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.hanging-indent {
+  padding-left: 25px ;
+  text-indent: -25px ;
+}
 </style>
