@@ -21,7 +21,6 @@ export default {
       return `${window.location.host}`
     },
     link: function () {
-      // TODO: CHANGE IT TO ACTUAL BASE URL
       return `/#/event/${this.eventId}`
     }
   },

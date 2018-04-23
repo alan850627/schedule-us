@@ -12,7 +12,7 @@
       <b-form-group id="" label="Possible Event Start Date:" label-for="eventStartDateForm">
         <b-form-input id="eventStartDateForm" type="date" v-model="form.start" required></b-form-input>
       </b-form-group>
-      <b-form-group id="" label="Possible Event Start Date:" label-for="eventEndDateForm">
+      <b-form-group id="" label="Possible Event End Date:" label-for="eventEndDateForm">
         <b-form-input id="eventEndDateForm" type="date" v-model="form.end" required></b-form-input>
       </b-form-group>
       <b-form-group id="" label="Your Name:" label-for="exampleInput3">
@@ -38,6 +38,9 @@ export default {
   },
 
   props: {
+    username: {
+      type: String
+    }
   },
 
   computed: {
@@ -76,8 +79,11 @@ export default {
         chatId: chatRef.id
       }
       let eventRef = db.collection('events').doc()
-      eventRef.set(event)
-      this.$router.push(`/event-created/${eventRef.id}`)
+      eventRef.set(event).then(() => {
+        this.$router.push(`/event-created/${eventRef.id}`)
+      }).catch((error) => {
+        alert('Problem with server... Try again. \nError: ' + error)
+      })
     },
     onReset: function (evt) {
       evt.preventDefault()
@@ -122,6 +128,7 @@ export default {
   },
 
   mounted () {
+    this.form.name = this.username
   }
 }
 </script>

@@ -17,7 +17,7 @@
         </b-form-input>
       </form>
     </b-modal>
-    <router-view/>
+    <router-view :username="username"></router-view>
   </div>
 </template>
 

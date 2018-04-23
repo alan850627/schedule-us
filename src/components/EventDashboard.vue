@@ -1,7 +1,5 @@
 <template>
   <div class="event-dashboard">
-    <h1>Event Dashboard</h1>
-
     <div v-if="validEvent">
       <time-table
         :id="event.timeTableId"
