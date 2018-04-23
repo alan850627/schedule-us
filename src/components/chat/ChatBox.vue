@@ -103,7 +103,10 @@ export default {
   },
 
   mounted () {
-    this.$bind('chatBox', db.collection('chat-boxes').doc(this.id))
+    this.$bind('chatBox', db.collection('chat-boxes').doc(this.id)).then((users) => {
+      let elem = this.$refs.chatScroll
+      elem.scrollTop = elem.scrollHeight
+    })
   }
 }
 </script>
