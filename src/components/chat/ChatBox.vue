@@ -7,13 +7,12 @@
       </chat-message>
     </div>
     <div>
-      <b-form-input v-model="chatMessage"
-                    type="text"
-                    placeholder="Enter your message"></b-form-input>
-      <!-- <p>Value: {{ chatMessage }}</p> -->
+      <b-form-input v-model="message"
+        type="text"
+        placeholder="Enter your message"></b-form-input>
     </div>
     <div id ="SubmitMsgButton">
-       <b-button>I am a Button</b-button>
+      <b-button>Send</b-button>
     </div>
   </div>
 </template>
@@ -43,7 +42,7 @@ export default {
   data () {
     return {
       chatBox: {},
-      chatMessage: ''
+      message: ''
     }
   },
 
@@ -58,15 +57,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-div.chat-box{
-  position: absolute;
-  right: 100px;
-  max-width: 500px;
-}
-
-#SubmitMsgButton{
-  padding-top: 10px;
-}
 
 </style>
