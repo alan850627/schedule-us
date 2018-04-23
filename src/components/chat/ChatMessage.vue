@@ -1,10 +1,12 @@
 <template>
-  <div class="chat-message">
+  <div class="chat-message" :title="timeAgo">
     {{ username }}: {{ message }}
+    <sup><small> {{timeAgo}}</small></sup>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'ChatMessage',
 
@@ -19,10 +21,17 @@ export default {
     message: {
       type: String,
       default: 'Default Message.'
+    },
+    timestamp: {
+      type: String,
+      default: `${Date.now()}`
     }
   },
 
   computed: {
+    timeAgo: function () {
+      return moment(Number(this.timestamp)).fromNow()
+    }
   },
 
   data () {

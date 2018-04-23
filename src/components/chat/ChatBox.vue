@@ -4,7 +4,8 @@
       <b-card-body v-for="(msg, time) in chatBox" v-bind:key="time">
          <chat-message
           :username="msg.username"
-          :message="msg.message">
+          :message="msg.message"
+          :timestamp="time">
         </chat-message>
       </b-card-body>
       <b-card-footer>

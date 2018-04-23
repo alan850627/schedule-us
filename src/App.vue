@@ -7,9 +7,9 @@
       </span>
     </app-header>
     <b-modal id="loginModal"
-             ref="modal"
-             title="What's your name?"
-             @ok="handleOk">
+      ref="modal"
+      title="What's your name?"
+      @ok="handleOk">
       <form @submit.stop.prevent="handleSubmit">
         <b-form-input type="text" slot="input"
           placeholder="Enter your name"
