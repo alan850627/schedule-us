@@ -9,11 +9,10 @@
           <b-nav-item href="/#/new-event">New Event</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
-          <b-button size="sm" class="my-2 my-sm-0" type="submit">Login</b-button>
+          <slot name="buttons"></slot>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-
   </div>
 </template>
 
@@ -25,6 +24,9 @@ export default {
   },
 
   props: {
+    username: {
+      type: String
+    }
   },
 
   computed: {
