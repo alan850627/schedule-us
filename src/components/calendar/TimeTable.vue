@@ -2,6 +2,10 @@
   <b-container class="time-table" v-on:mousedown="mouseDown=true" v-on:mouseup="mouseDown=false">
     <b-row class="text-center">
       <b-col v-for="(arr, day) in daySeparated" v-bind:key="day" cols="12" md="auto">
+        <b>
+          <div>{{ getDayOfWeek(arr[0].startTime) }}</div>
+          <div>{{ getDate(arr[0].startTime) }}</div>
+        </b>
         <div v-for="timeSlot in arr" v-bind:key="timeSlot.startTime">
           <time-slot
             :username="username"
@@ -60,6 +64,19 @@ export default {
         }
       })
       return columns
+    },
+    weekSeparated: function () {
+      let weeks = [[]]
+      let i = 0
+      Object.keys(this.daySeparated).forEach((day) => {
+        let weekday = moment(day[0].startTime).isoWeekday()
+        weeks[i].push(this.daySeparated[day])
+        if (weekday === 6) {
+          i += 1
+          weeks.push([])
+        }
+      })
+      return weeks
     }
   },
 
@@ -78,6 +95,29 @@ export default {
         }
       })
       db.collection('time-table').doc(this.id).set(this.timeTable)
+    },
+    getDate: function (timestamp) {
+      return moment(timestamp).format('MMMM DD')
+    },
+    getDayOfWeek: function (timestamp) {
+      let str = ''
+      let day = moment(timestamp).isoWeekday()
+      if (day === 1) {
+        str = 'Mon'
+      } else if (day === 2) {
+        str = 'Tues'
+      } else if (day === 3) {
+        str = 'Wed'
+      } else if (day === 4) {
+        str = 'Thur'
+      } else if (day === 5) {
+        str = 'Fri'
+      } else if (day === 6) {
+        str = 'Sat'
+      } else if (day === 7) {
+        str = 'Sun'
+      }
+      return str
     }
   },
 
