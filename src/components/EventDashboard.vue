@@ -1,16 +1,21 @@
 <template>
   <div class="event-dashboard">
-    <div v-if="validEvent">
-      <time-table
-        :id="event.timeTableId"
-        :editable="false"
-        username="alanolen">
-      </time-table>
-
-      <chat-box
-        :id="event.chatId">
-      </chat-box>
-    </div>
+    <b-container v-if="validEvent">
+      <b-row>
+        <b-col sm="8">
+          <time-table
+            :id="event.timeTableId"
+            :editable="false"
+            username="alanolen">
+          </time-table>
+        </b-col>
+        <b-col sm="4">
+          <chat-box
+            :id="event.chatId">
+          </chat-box>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 

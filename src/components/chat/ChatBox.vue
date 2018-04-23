@@ -1,19 +1,26 @@
 <template id = "ChatBoxMessage">
   <div class="chat-box">
-    <div v-for="(msg, time) in chatBox" v-bind:key="time">
-      <chat-message
-        :username="msg.username"
-        :message="msg.message">
-      </chat-message>
-    </div>
-    <div>
-      <b-form-input v-model="message"
-        type="text"
-        placeholder="Enter your message"></b-form-input>
-    </div>
-    <div id ="SubmitMsgButton">
-      <b-button>Send</b-button>
-    </div>
+    <b-card no-body>
+      <b-card-body v-for="(msg, time) in chatBox" v-bind:key="time">
+         <chat-message
+          :username="msg.username"
+          :message="msg.message">
+        </chat-message>
+      </b-card-body>
+      <b-card-footer>
+        <b-row>
+          <b-col sm="9">
+            <b-form-input v-model="message"
+              type="text"
+              placeholder="Enter your message">
+            </b-form-input>
+          </b-col>
+          <b-col sm="3">
+            <b-button @click="sendMessage()">Send</b-button>
+          </b-col>
+        </b-row>
+      </b-card-footer>
+    </b-card>
   </div>
 </template>
 
@@ -47,6 +54,9 @@ export default {
   },
 
   methods: {
+    sendMessage: function () {
+
+    }
   },
 
   mounted () {
