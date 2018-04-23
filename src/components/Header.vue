@@ -1,19 +1,14 @@
 <template>
-  <div class="test">
-    <time-table id="0atjTN4NdauTwMmFAPSg" :editable="false" username="alanolen"></time-table>
+  <div class="header">
+    <h1>Schedule Us!</h1>
   </div>
 </template>
 
 <script>
-import TimeTable from './calendar/TimeTable'
-import ChatBox from './chat/ChatBox'
-
 export default {
-  name: 'Test',
+  name: 'Header',
 
   components: {
-    TimeTable,
-    ChatBox
   },
 
   props: {

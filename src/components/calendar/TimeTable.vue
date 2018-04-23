@@ -1,19 +1,21 @@
 <template>
-  <div class="time-table" v-on:mousedown="mouseDown=true" v-on:mouseup="mouseDown=false">
-    <div v-for="(arr, day) in daySeparated" v-bind:key="day" class="column">
-      <div v-for="timeSlot in arr" v-bind:key="timeSlot.startTime">
-        <time-slot
-          :username="username"
-          :editable="editable"
-          :mouseDown="mouseDown"
-          :startTime="timeSlot.startTime"
-          :length="timeSlot.length"
-          :response="timeSlot.response">
-        </time-slot>
-      </div>
-    </div>
+  <b-container class="time-table" v-on:mousedown="mouseDown=true" v-on:mouseup="mouseDown=false">
+    <b-row class="text-center">
+      <b-col v-for="(arr, day) in daySeparated" v-bind:key="day" cols="12" md="auto">
+        <div v-for="timeSlot in arr" v-bind:key="timeSlot.startTime">
+          <time-slot
+            :username="username"
+            :editable="editable"
+            :mouseDown="mouseDown"
+            :startTime="timeSlot.startTime"
+            :length="timeSlot.length"
+            :response="timeSlot.response">
+          </time-slot>
+        </div>
+      </b-col>
+    </b-row>
     <button v-if="editable" v-on:click="submit()">Submit</button>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -87,9 +89,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.column {
-  float: left;
-  width: 10%;
-}
-
 </style>
