@@ -4,8 +4,6 @@
       <b-row>
         <b-col sm="8">
           <b-card>
-
-            <b-button @click="uploadICalendar()">Upload iCalendar</b-button>
             <time-table
               ref="timeTable"
               :id="event.timeTableId"
@@ -23,7 +21,10 @@
             <span style="background:#FFF3CD">yellow</span>
             means maybe, and simply leave the timeslot blank if you cannot make it at that time. </p>
 
-            <p>You could also upload an iCalendar file and we will highlight for you! Also, leave your email if you want updates about this event:</p>
+            <p>You could also upload an iCalendar file and we will highlight for you! </p>
+            <b-form-file v-model="file" :state="Boolean(file)" placeholder="iCalendar file..."></b-form-file>
+            <p></p>
+            <p>Also, leave your email if you want updates about this event:</p>
             <b-form-input v-model="userEmail" type="email" placeholder="Enter your email"></b-form-input>
             <br>
             <b-button @click="submit()">Submit response</b-button>
@@ -62,6 +63,7 @@ export default {
 
   data () {
     return {
+      file: null,
       userEmail: '',
       eventId: '',
       event: () => { return {} }
@@ -95,6 +97,9 @@ export default {
       // react to route changes...
       this.eventId = to.params.eventId
       this.$bind('event', db.collection('events').doc(this.eventId))
+    },
+    file: function (newFile, old) {
+      console.log(this.file)
     }
   },
 
