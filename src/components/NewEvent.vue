@@ -79,7 +79,7 @@ export default {
         hostName: this.hostName,
         timeTableId: timeTableRef.id,
         chatId: chatRef.id,
-        responses: {}
+        response: {}
       }
       let eventRef = db.collection('events').doc()
       eventRef.set(event).then(() => {

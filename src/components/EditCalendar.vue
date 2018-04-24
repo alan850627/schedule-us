@@ -4,6 +4,8 @@
       <b-row>
         <b-col sm="8">
           <b-card>
+
+            <b-button @click="uploadICalendar()">Upload iCalendar</b-button>
             <time-table
               ref="timeTable"
               :id="event.timeTableId"
@@ -24,7 +26,7 @@
             <p>You could also upload an iCalendar file and we will highlight for you! Also, leave your email if you want updates about this event:</p>
             <b-form-input v-model="userEmail" type="email" placeholder="Enter your email"></b-form-input>
             <br>
-            <b-button @click="submit()">Submit</b-button>
+            <b-button @click="submit()">Submit response</b-button>
           </div>
           <div v-else>
             <b-alert show variant="danger">Please login to continue!</b-alert>
@@ -61,6 +63,7 @@ export default {
   data () {
     return {
       userEmail: '',
+      eventId: '',
       event: () => { return {} }
     }
   },
@@ -70,8 +73,20 @@ export default {
       if (this.username.length === 0) {
         return
       }
-
+      this.event.response[this.username] = {
+        timestamp: Date.now(),
+        email: this.userEmail
+      }
       this.$refs.timeTable.submit()
+      let eventRef = db.collection('events').doc(this.eventId)
+      eventRef.update(this.event).then(() => {
+        this.$router.push(`/event/${eventRef.id}`)
+      }).catch((error) => {
+        alert('Problem with server... Try again. \nError: ' + error)
+      })
+    },
+    uploadICalendar: function () {
+
     }
   },
 

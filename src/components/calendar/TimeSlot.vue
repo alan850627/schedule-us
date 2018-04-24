@@ -1,5 +1,5 @@
 <template>
-  <div class="time-slot noselect" :class="status" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
+  <div class="time-slot noselect" :class="status" :style="`background:${status}`" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
     {{ displayTime }}
   </div>
 </template>
@@ -60,15 +60,21 @@ export default {
         return this.response[this.username]
       }
 
-      let status = 'yes'
+      let r = 0
+      let g = 0
+      let b = 0
+      let step = 230 / usernames.length
       usernames.forEach(username => {
-        if (this.response[username] === 'maybe') {
-          status = 'maybe'
+        if (this.response[username] === 'yes') {
+          g += step
+        } else if (this.response[username] === 'maybe') {
+          g += step
+          r += step
         } else if (this.response[username] === 'no') {
-          return 'bad'
+          r += step
         }
       })
-      return status
+      return `rgb(${r}, ${g}, ${b})`
     }
   },
 
