@@ -1,7 +1,8 @@
 <template>
   <b-container class="time-table" v-on:mousedown="mouseDown=true" v-on:mouseup="mouseDown=false">
-    <b-row class="text-center">
-      <b-col v-for="(arr, day) in daySeparated" v-bind:key="day" cols="12" md="auto">
+    <b-pagination align="center" size="md" :total-rows="weekSeparated.length" v-model="currentPage" :per-page="1"></b-pagination>
+    <b-row class="justify-content-md-center">
+      <b-col v-for="(arr, day) in weekDisplayed" v-bind:key="day" cols="12" md="auto">
         <b>
           <div>{{ getDayOfWeek(arr[0].startTime) }}</div>
           <div>{{ getDate(arr[0].startTime) }}</div>
@@ -69,7 +70,7 @@ export default {
       let weeks = [[]]
       let i = 0
       Object.keys(this.daySeparated).forEach((day) => {
-        let weekday = moment(day[0].startTime).isoWeekday()
+        let weekday = moment(this.daySeparated[day][0].startTime).isoWeekday()
         weeks[i].push(this.daySeparated[day])
         if (weekday === 6) {
           i += 1
@@ -77,13 +78,17 @@ export default {
         }
       })
       return weeks
+    },
+    weekDisplayed: function () {
+      return this.weekSeparated[this.currentPage - 1]
     }
   },
 
   data () {
     return {
       timeTable: {},
-      mouseDown: false
+      mouseDown: false,
+      currentPage: 1
     }
   },
 
