@@ -1,5 +1,5 @@
 <template>
-  <div class="time-slot noselect" :style="`background:${status}`" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
+  <div v-b-tooltip.rightbottom title="I'm a tooltip!"  placement="rightbottom" id="timeslot" class="time-slot noselect" :style="`background:${status}`" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
     {{ displayTime }}
   </div>
 </template>

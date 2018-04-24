@@ -15,4 +15,8 @@ let config = {
 // Here we are initializing the Firebase connection.
 const firebaseApp = firebase.initializeApp(config)
 
-export default firebaseApp.firestore()
+const firestore = firebaseApp.firestore()
+const settings = { timestampsInSnapshots: true }
+firestore.settings(settings)
+
+export default firestore

@@ -105,6 +105,23 @@ export default {
       })
       db.collection('time-table').doc(this.id).set(this.timeTable)
     },
+    allGood: function () {
+      Object.keys(this.timeTable).forEach(timestamp => {
+        this.timeTable[timestamp].response[this.username] = 'yes'
+      })
+    },
+    markRange: function (start, end) {
+      Object.keys(this.timeTable).forEach(timestamp => {
+        if (start <= timestamp && end >= timestamp) {
+          this.timeTable[timestamp].response[this.username] = 'no'
+        }
+      })
+    },
+    clear: function () {
+      Object.keys(this.timeTable).forEach(timestamp => {
+        this.timeTable[timestamp].response[this.username] = 'no'
+      })
+    },
     getDate: function (timestamp) {
       return moment(timestamp).format('MMMM DD')
     },

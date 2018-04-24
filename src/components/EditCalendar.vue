@@ -22,6 +22,12 @@
             means maybe, and simply leave the timeslot blank if you cannot make it at that time. </p>
 
             <p>You could also upload an iCalendar file and we will highlight for you! </p>
+            <b-form-checkbox id="checkbox1"
+              v-model="resetCalendarAtUpload"
+              :value="true"
+              :unchecked-value="false">
+              Reset calendar before upload
+            </b-form-checkbox>
             <b-form-file v-model="file" :state="Boolean(file)" placeholder="iCalendar file..."></b-form-file>
             <p></p>
             <p>Also, leave your email if you want updates about this event:</p>
@@ -41,6 +47,7 @@
 <script>
 import db from '../firebaseInit'
 import TimeTable from './calendar/TimeTable'
+import icalendar from 'icalendar'
 export default {
   name: 'EditCalendar',
 
@@ -66,6 +73,7 @@ export default {
       file: null,
       userEmail: '',
       eventId: '',
+      resetCalendarAtUpload: false,
       event: () => { return {} }
     }
   },
@@ -99,7 +107,21 @@ export default {
       this.$bind('event', db.collection('events').doc(this.eventId))
     },
     file: function (newFile, old) {
-      console.log(this.file)
+      if (this.resetCalendarAtUpload) {
+        this.$refs.timeTable.allGood()
+        this.resetCalendarAtUpload = false
+      }
+      let reader = new FileReader()
+      reader.onloadend = (e) => {
+        let data = e.target.result
+        let ical = icalendar.parse_calendar(data)
+        ical.events().forEach((event) => {
+          let start = event.properties.DTSTART[0].value
+          let end = event.properties.DTEND[0].value
+          this.$refs.timeTable.markRange(start, end)
+        })
+      }
+      reader.readAsText(newFile)
     }
   },
 

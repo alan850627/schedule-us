@@ -16,6 +16,7 @@
     "bootstrap-vue": "^2.0.0-rc.2",
     "browser-cookies": "^1.2.0",
     "firebase": "^4.11.0",
+    "icalendar": "^0.7.1",
     "moment": "^2.22.0",
     "path": "^0.12.7",
     "vue": "^2.5.2",
