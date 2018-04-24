@@ -7,16 +7,25 @@
             <time-table
               :id="event.timeTableId"
               :editable="false"
-              :username="username">
+              :username="viewUsername"
+              :view-single="viewUsername.length > 0">
             </time-table>
           </b-card>
         </b-col>
         <b-col sm="4">
-          <b-button :href="`/#/edit-calendar/${eventId}`">Edit Response</b-button>
+          <b-button :href="`/#/edit-calendar/${eventId}`">Edit Your Response</b-button>
           <chat-box
+            class="py-4"
             :id="event.chatId"
             :username="username">
           </chat-box>
+
+          <b-card title="Responses">
+            <div v-for="(res, name) in event.response" v-bind:key="name"
+              v-on:mouseover="updateView(name)" v-on:mouseleave="updateView('')">
+              {{ name }}
+            </div>
+          </b-card>
         </b-col>
       </b-row>
     </b-container>
@@ -52,11 +61,15 @@ export default {
   data () {
     return {
       eventId: '',
+      viewUsername: '',
       event: () => { return {} }
     }
   },
 
   methods: {
+    updateView: function (name) {
+      this.viewUsername = name
+    }
   },
 
   watch: {
