@@ -14,12 +14,12 @@
             :mouseDown="mouseDown"
             :startTime="timeSlot.startTime"
             :length="timeSlot.length"
-            :response="timeSlot.response">
+            :response="timeSlot.response"
+            :view-single="viewSingle">
           </time-slot>
         </div>
       </b-col>
     </b-row>
-    <button v-if="editable" v-on:click="submit()">Submit</button>
   </b-container>
 </template>
 
@@ -48,6 +48,10 @@ export default {
       required: true,
       type: String,
       default: ''
+    },
+    viewSingle: {
+      type: Boolean,
+      default: false
     }
   },
 

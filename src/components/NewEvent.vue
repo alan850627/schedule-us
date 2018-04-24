@@ -5,28 +5,26 @@
         <b-card>
           <h1 style = "text-align:center;"> Create a new event!</h1>
           <br>
-          <b-form @submit="onSubmit" @reset="onReset" v-if="true">
-            <b-form-group id="" label="Event Name:" label-for="eventNameForm">
-              <b-form-input id="eventNameForm" type="text" v-model="form.eventName" required></b-form-input>
-            </b-form-group>
-            <b-form-group id="" label="Event Description:" label-for="eventDescriptionForm">
-              <b-form-input id="eventDescriptionForm" type="text" v-model="form.description" required></b-form-input>
-            </b-form-group>
-            <b-form-group id="" label="Possible Event Start Date:" label-for="eventStartDateForm">
-              <b-form-input id="eventStartDateForm" type="date" v-model="form.start" required></b-form-input>
-            </b-form-group>
-            <b-form-group id="" label="Possible Event End Date:" label-for="eventEndDateForm">
-              <b-form-input id="eventEndDateForm" type="date" v-model="form.end" required></b-form-input>
-            </b-form-group>
-            <b-form-group id="" label="Your Name:" label-for="exampleInput3">
-              <b-form-input id="exampleInput3" type="text" v-model="form.hostName" required></b-form-input>
-            </b-form-group>
-            <b-form-group id="" label="Email:" label-for="exampleInput4">
-              <b-form-input id="exampleInput4" type="email" v-model="form.hostEmail" required></b-form-input>
-            </b-form-group>
-            <b-button type="submit" variant="primary">Submit</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
-          </b-form>
+          <b-form-group id="" label="Event Name:" label-for="eventNameForm">
+            <b-form-input id="eventNameForm" type="text" v-model="eventName" required></b-form-input>
+          </b-form-group>
+          <b-form-group id="" label="Event Description:" label-for="eventDescriptionForm">
+            <b-form-input id="eventDescriptionForm" type="text" v-model="description" required></b-form-input>
+          </b-form-group>
+          <b-form-group id="" label="Possible Event Start Date:" label-for="eventStartDateForm">
+            <b-form-input id="eventStartDateForm" type="date" v-model="start" required></b-form-input>
+          </b-form-group>
+          <b-form-group id="" label="Possible Event End Date:" label-for="eventEndDateForm">
+            <b-form-input id="eventEndDateForm" type="date" v-model="end" required></b-form-input>
+          </b-form-group>
+          <b-form-group id="" label="Your Name:" label-for="exampleInput3">
+            <b-form-input id="exampleInput3" type="text" v-model="hostName" required></b-form-input>
+          </b-form-group>
+          <b-form-group id="" label="Email:" label-for="exampleInput4">
+            <b-form-input id="exampleInput4" type="email" v-model="hostEmail" required></b-form-input>
+          </b-form-group>
+          <b-button @click="submit" variant="primary">Submit</b-button>
+          <b-button @click="reset" variant="danger">Reset</b-button>
         </b-card>
       </b-col>
     </b-row>
@@ -54,21 +52,19 @@ export default {
 
   data () {
     return {
-      form: {
-        eventname: '',
-        descrip: '',
-        email: '',
-        name: '',
-        start: '',
-        end: ''
-      }
+      eventName: '',
+      description: '',
+      start: '',
+      end: '',
+      hostName: '',
+      hostEmail: ''
     }
   },
 
   methods: {
-    onSubmit: function (evt) {
-      let startTimeStamp = moment(this.form.start, 'YYYY-MM-DD').valueOf()
-      let endTimeStamp = moment(this.form.end, 'YYYY-MM-DD').valueOf()
+    submit: function () {
+      let startTimeStamp = moment(this.start, 'YYYY-MM-DD').valueOf()
+      let endTimeStamp = moment(this.end, 'YYYY-MM-DD').valueOf()
       if (startTimeStamp > endTimeStamp) {
         alert('Invalid date range!')
         return
@@ -77,12 +73,13 @@ export default {
       let timeTableRef = this.makeTimeTable(startTimeStamp, 3600000, numDays)
       let chatRef = this.makeChatBox()
       let event = {
-        name: this.form.eventName,
-        description: this.form.description,
-        hostEmail: this.form.hostEmail,
-        hostName: this.form.hostName,
+        name: this.eventName,
+        description: this.description,
+        hostEmail: this.hostEmail,
+        hostName: this.hostName,
         timeTableId: timeTableRef.id,
-        chatId: chatRef.id
+        chatId: chatRef.id,
+        responses: {}
       }
       let eventRef = db.collection('events').doc()
       eventRef.set(event).then(() => {
@@ -91,15 +88,14 @@ export default {
         alert('Problem with server... Try again. \nError: ' + error)
       })
     },
-    onReset: function (evt) {
-      evt.preventDefault()
+    reset: function () {
       /* Reset our form values */
-      this.form.hostEmail = ''
-      this.form.hostName = ''
-      this.form.description = ''
-      this.form.eventName = ''
-      this.form.start = ''
-      this.form.end = ''
+      this.hostEmail = ''
+      this.hostName = ''
+      this.description = ''
+      this.eventName = ''
+      this.start = ''
+      this.end = ''
     },
 
     // May move/update this.
@@ -133,8 +129,14 @@ export default {
     }
   },
 
+  watch: {
+    username: function (newName, old) {
+      this.hostName = newName
+    }
+  },
+
   mounted () {
-    this.form.hostName = this.username
+    this.hostName = this.username
   }
 }
 </script>

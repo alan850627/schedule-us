@@ -1,5 +1,5 @@
 <template>
-  <div class="time-slot" :class="status" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
+  <div class="time-slot noselect" :class="status" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
     {{ displayTime }}
   </div>
 </template>
@@ -65,7 +65,7 @@ export default {
         if (this.response[username] === 'maybe') {
           status = 'maybe'
         } else if (this.response[username] === 'no') {
-          status = 'no'
+          return 'bad'
         }
       })
       return status
@@ -117,14 +117,28 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .yes {
-  background:green
+  background:#D4EDDA
 }
 
 .no {
   background:white
 }
 
+.bad {
+  background:#F7D7DA
+}
+
 .maybe {
-  background:yellow
+  background:#FFF3CD
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 </style>

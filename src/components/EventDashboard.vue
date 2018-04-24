@@ -3,14 +3,16 @@
     <b-container v-if="validEvent">
       <b-row>
         <b-col sm="8">
-          <time-table
-            :id="event.timeTableId"
-            :editable="false"
-            :username="username">
-          </time-table>
+          <b-card>
+            <time-table
+              :id="event.timeTableId"
+              :editable="false"
+              :username="username">
+            </time-table>
+          </b-card>
         </b-col>
         <b-col sm="4">
-          <b-button href="/#/">Edit Response</b-button>
+          <b-button :href="`/#/edit-calendar/${eventId}`">Edit Response</b-button>
           <chat-box
             :id="event.chatId"
             :username="username">
