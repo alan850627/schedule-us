@@ -82,5 +82,7 @@ export default {
 </script>
 
 <style>
-
+.tooltip-inner {
+  text-align:left;
+}
 </style>

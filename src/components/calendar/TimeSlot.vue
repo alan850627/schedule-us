@@ -1,12 +1,12 @@
 <template>
-  <div v-b-tooltip.rightbottom title="I'm a tooltip!"  placement="rightbottom" id="timeslot" class="time-slot noselect" :style="`background:${status}`" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
+  <div v-b-tooltip.rightbottom :title="hoverText"  placement="rightbottom" id="timeslot" class="time-slot noselect" :style="`background:${status}`" v-on:mouseover="updateStatusDrag" v-on:mousedown="updateStatusClick">
     {{ displayTime }}
   </div>
 </template>
 
 <script>
 import moment from 'moment'
-
+import invertBy from 'lodash/invertBy'
 export default {
   name: 'TimeSlot',
 
@@ -50,6 +50,31 @@ export default {
       return moment(this.startTime).format('LT')
     },
 
+    hoverText: function () {
+      let grouped = invertBy(this.response, (res) => {
+        return res
+      })
+      let str = '[yes]- '
+      if (grouped['yes']) {
+        Object.keys(grouped['yes']).forEach((person) => {
+          str += `${grouped['yes'][person]}; `
+        })
+      }
+      str += '\n[maybe]- '
+      if (grouped['maybe']) {
+        Object.keys(grouped['maybe']).forEach((person) => {
+          str += `${grouped['maybe'][person]}; `
+        })
+      }
+      str += '\n[no]- '
+      if (grouped['no']) {
+        Object.keys(grouped['no']).forEach((person) => {
+          str += `${grouped['no'][person]}; `
+        })
+      }
+      return str
+    },
+
     status: function () {
       let usernames = Object.keys(this.response)
       if (usernames.length === 0) {
@@ -62,7 +87,7 @@ export default {
           return 'rgb(0, 230, 0)'
         } else if (r === 'maybe') {
           return 'rgb(230, 230, 0)'
-        } else if (r === 'no') {
+        } else {
           return 'white'
         }
       }

@@ -9,7 +9,7 @@
               :id="event.timeTableId"
               :editable="username.length > 0"
               :username="username"
-              :view-single="true">
+              :view-single="username.length > 0">
             </time-table>
           </b-card>
         </b-col>
@@ -33,7 +33,9 @@
             <p>Also, leave your email if you want updates about this event:</p>
             <b-form-input v-model="userEmail" type="email" placeholder="Enter your email"></b-form-input>
             <br>
-            <b-button @click="submit()">Submit response</b-button>
+            <b-button @click="clear()">Clear</b-button>
+            <b-button @click="cancel()" variant="danger">Cancel</b-button>
+            <b-button @click="submit()" variant="primary">Submit response</b-button>
           </div>
           <div v-else>
             <b-alert show variant="danger">Please login to continue!</b-alert>
@@ -95,8 +97,12 @@ export default {
         alert('Problem with server... Try again. \nError: ' + error)
       })
     },
-    uploadICalendar: function () {
-
+    clear: function () {
+      this.$refs.timeTable.clear()
+    },
+    cancel: function () {
+      let eventRef = db.collection('events').doc(this.eventId)
+      this.$router.push(`/event/${eventRef.id}`)
     }
   },
 
