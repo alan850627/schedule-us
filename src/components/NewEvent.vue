@@ -7,10 +7,10 @@
           <br>
           <b-form @submit="onSubmit" @reset="onReset" v-if="true">
             <b-form-group id="" label="Event Name:" label-for="eventNameForm">
-              <b-form-input id="eventNameForm" type="text" v-model="form.eventname" required></b-form-input>
+              <b-form-input id="eventNameForm" type="text" v-model="form.eventName" required></b-form-input>
             </b-form-group>
             <b-form-group id="" label="Event Description:" label-for="eventDescriptionForm">
-              <b-form-input id="eventDescriptionForm" type="text" v-model="form.descrip" required></b-form-input>
+              <b-form-input id="eventDescriptionForm" type="text" v-model="form.description" required></b-form-input>
             </b-form-group>
             <b-form-group id="" label="Possible Event Start Date:" label-for="eventStartDateForm">
               <b-form-input id="eventStartDateForm" type="date" v-model="form.start" required></b-form-input>
@@ -19,10 +19,10 @@
               <b-form-input id="eventEndDateForm" type="date" v-model="form.end" required></b-form-input>
             </b-form-group>
             <b-form-group id="" label="Your Name:" label-for="exampleInput3">
-              <b-form-input id="exampleInput3" type="text" v-model="form.name" required></b-form-input>
+              <b-form-input id="exampleInput3" type="text" v-model="form.hostName" required></b-form-input>
             </b-form-group>
             <b-form-group id="" label="Email:" label-for="exampleInput4">
-              <b-form-input id="exampleInput4" type="email" v-model="form.email" required></b-form-input>
+              <b-form-input id="exampleInput4" type="email" v-model="form.hostEmail" required></b-form-input>
             </b-form-group>
             <b-button type="submit" variant="primary">Submit</b-button>
             <b-button type="reset" variant="danger">Reset</b-button>
@@ -77,10 +77,10 @@ export default {
       let timeTableRef = this.makeTimeTable(startTimeStamp, 3600000, numDays)
       let chatRef = this.makeChatBox()
       let event = {
-        name: this.form.eventname,
-        descirption: this.form.descrip,
-        hostEmail: this.form.email,
-        hostName: this.form.name,
+        name: this.form.eventName,
+        description: this.form.description,
+        hostEmail: this.form.hostEmail,
+        hostName: this.form.hostName,
         timeTableId: timeTableRef.id,
         chatId: chatRef.id
       }
@@ -94,10 +94,10 @@ export default {
     onReset: function (evt) {
       evt.preventDefault()
       /* Reset our form values */
-      this.form.email = ''
-      this.form.name = ''
-      this.form.descrip = ''
-      this.form.eventname = ''
+      this.form.hostEmail = ''
+      this.form.hostName = ''
+      this.form.description = ''
+      this.form.eventName = ''
       this.form.start = ''
       this.form.end = ''
     },
@@ -134,7 +134,7 @@ export default {
   },
 
   mounted () {
-    this.form.name = this.username
+    this.form.hostName = this.username
   }
 }
 </script>

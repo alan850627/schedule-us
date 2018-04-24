@@ -2,7 +2,7 @@
   <div id="app">
     <app-header :username="username">
       <span slot="buttons">
-        <b-button v-if="username" size="sm" class="my-2 my-sm-0" @click="handleLogout">Logout</b-button>
+        <b-button v-if="username" size="sm" class="my-2 my-sm-0" @click="handleLogout">{{username}} Logout</b-button>
         <b-button v-else size="sm" class="my-2 my-sm-0" v-b-modal.loginModal>Login</b-button>
       </span>
     </app-header>

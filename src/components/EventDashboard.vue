@@ -11,7 +11,6 @@
         </b-col>
         <b-col sm="4">
           <b-button href="/#/">Edit Response</b-button>
-          <b-button href="/#/">Edit Event</b-button>
           <chat-box
             :id="event.chatId"
             :username="username">
