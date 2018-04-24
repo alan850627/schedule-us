@@ -1,30 +1,36 @@
 <template>
-  <div class="new-event">
-    <h1 style = "text-align:center;"> Create a new event!</h1>
-    <br>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="true">
-      <b-form-group id="" label="Event Name:" label-for="eventNameForm">
-        <b-form-input id="eventNameForm" type="text" v-model="form.eventname" required></b-form-input>
-      </b-form-group>
-      <b-form-group id="" label="Event Description:" label-for="eventDescriptionForm">
-        <b-form-input id="eventDescriptionForm" type="text" v-model="form.descrip" required></b-form-input>
-      </b-form-group>
-      <b-form-group id="" label="Possible Event Start Date:" label-for="eventStartDateForm">
-        <b-form-input id="eventStartDateForm" type="date" v-model="form.start" required></b-form-input>
-      </b-form-group>
-      <b-form-group id="" label="Possible Event End Date:" label-for="eventEndDateForm">
-        <b-form-input id="eventEndDateForm" type="date" v-model="form.end" required></b-form-input>
-      </b-form-group>
-      <b-form-group id="" label="Your Name:" label-for="exampleInput3">
-        <b-form-input id="exampleInput3" type="text" v-model="form.name" required></b-form-input>
-      </b-form-group>
-      <b-form-group id="" label="Email:" label-for="exampleInput4">
-        <b-form-input id="exampleInput4" type="email" v-model="form.email" required></b-form-input>
-      </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-  </div>
+  <b-container class="new-event">
+    <b-row align-h="center">
+      <b-col cols="8">
+        <b-card>
+          <h1 style = "text-align:center;"> Create a new event!</h1>
+          <br>
+          <b-form @submit="onSubmit" @reset="onReset" v-if="true">
+            <b-form-group id="" label="Event Name:" label-for="eventNameForm">
+              <b-form-input id="eventNameForm" type="text" v-model="form.eventname" required></b-form-input>
+            </b-form-group>
+            <b-form-group id="" label="Event Description:" label-for="eventDescriptionForm">
+              <b-form-input id="eventDescriptionForm" type="text" v-model="form.descrip" required></b-form-input>
+            </b-form-group>
+            <b-form-group id="" label="Possible Event Start Date:" label-for="eventStartDateForm">
+              <b-form-input id="eventStartDateForm" type="date" v-model="form.start" required></b-form-input>
+            </b-form-group>
+            <b-form-group id="" label="Possible Event End Date:" label-for="eventEndDateForm">
+              <b-form-input id="eventEndDateForm" type="date" v-model="form.end" required></b-form-input>
+            </b-form-group>
+            <b-form-group id="" label="Your Name:" label-for="exampleInput3">
+              <b-form-input id="exampleInput3" type="text" v-model="form.name" required></b-form-input>
+            </b-form-group>
+            <b-form-group id="" label="Email:" label-for="exampleInput4">
+              <b-form-input id="exampleInput4" type="email" v-model="form.email" required></b-form-input>
+            </b-form-group>
+            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-button type="reset" variant="danger">Reset</b-button>
+          </b-form>
+        </b-card>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
