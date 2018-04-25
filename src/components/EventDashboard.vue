@@ -14,6 +14,7 @@
         </b-col>
         <b-col sm="4">
           <b-button :href="`/#/edit-calendar/${eventId}`">Edit Your Response</b-button>
+          <b-button @click="sendEmail()">Email Everyone</b-button>
           <chat-box
             class="py-4"
             :id="event.chatId"
@@ -69,6 +70,9 @@ export default {
   methods: {
     updateView: function (name) {
       this.viewUsername = name
+    },
+    sendEmail: function () {
+
     }
   },
 
