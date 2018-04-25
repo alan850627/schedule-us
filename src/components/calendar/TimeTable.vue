@@ -81,6 +81,10 @@ export default {
           weeks.push([])
         }
       })
+      // Edge case where last day is a Saturday... a new entry would be added.
+      if (weeks[i].length === 0) {
+        weeks.pop()
+      }
       return weeks
     },
     weekDisplayed: function () {
@@ -100,26 +104,26 @@ export default {
     submit: function () {
       Object.keys(this.timeTable).forEach(timestamp => {
         if (!this.timeTable[timestamp].response[this.username]) {
-          this.timeTable[timestamp].response[this.username] = 'no'
+          this.$set(this.timeTable[timestamp].response, this.username, 'no')
         }
       })
       db.collection('time-table').doc(this.id).set(this.timeTable)
     },
     allGood: function () {
       Object.keys(this.timeTable).forEach(timestamp => {
-        this.timeTable[timestamp].response[this.username] = 'yes'
+        this.$set(this.timeTable[timestamp].response, this.username, 'yes')
       })
     },
     markRange: function (start, end) {
       Object.keys(this.timeTable).forEach(timestamp => {
         if (start <= timestamp && end >= timestamp) {
-          this.timeTable[timestamp].response[this.username] = 'no'
+          this.$set(this.timeTable[timestamp].response, this.username, 'no')
         }
       })
     },
     clear: function () {
       Object.keys(this.timeTable).forEach(timestamp => {
-        this.timeTable[timestamp].response[this.username] = 'no'
+        this.$set(this.timeTable[timestamp].response, this.username, 'no')
       })
     },
     getDate: function (timestamp) {

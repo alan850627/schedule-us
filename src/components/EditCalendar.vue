@@ -28,7 +28,19 @@
               :unchecked-value="false">
               Reset calendar before upload
             </b-form-checkbox>
-            <b-form-file v-model="file" :state="Boolean(file)" placeholder="iCalendar file..."></b-form-file>
+            <b-form-file v-b-tooltip.rightbottom title="Works only for non-recurring calendar entires" v-model="file" placeholder="iCalendar file..."></b-form-file>
+            <b-alert variant="danger"
+              dismissible
+              :show="uploadFailed"
+              @dismissed="uploadFailed=false">
+              Error processing iCalendar file!
+            </b-alert>
+            <b-alert variant="success"
+              dismissible
+              :show="uploadSuccess"
+              @dismissed="uploadSuccess=false">
+              Calendar updated!
+            </b-alert>
             <p></p>
             <p>Also, leave your email if you want updates about this event:</p>
             <b-form-input v-model="userEmail" type="email" placeholder="Enter your email"></b-form-input>
@@ -76,6 +88,8 @@ export default {
       userEmail: '',
       eventId: '',
       resetCalendarAtUpload: false,
+      uploadFailed: false,
+      uploadSuccess: false,
       event: () => { return {} }
     }
   },
@@ -113,19 +127,30 @@ export default {
       this.$bind('event', db.collection('events').doc(this.eventId))
     },
     file: function (newFile, old) {
+      if (!newFile) {
+        return
+      }
       if (this.resetCalendarAtUpload) {
         this.$refs.timeTable.allGood()
         this.resetCalendarAtUpload = false
       }
       let reader = new FileReader()
       reader.onloadend = (e) => {
-        let data = e.target.result
-        let ical = icalendar.parse_calendar(data)
-        ical.events().forEach((event) => {
-          let start = event.properties.DTSTART[0].value
-          let end = event.properties.DTEND[0].value
-          this.$refs.timeTable.markRange(start, end)
-        })
+        try {
+          let data = e.target.result
+          let ical = icalendar.parse_calendar(data)
+          ical.events().forEach((event) => {
+            let start = event.properties.DTSTART[0].value
+            let end = event.properties.DTEND[0].value
+            this.$refs.timeTable.markRange(start, end)
+          })
+          this.uploadFailed = false
+          this.uploadSuccess = true
+        } catch (err) {
+          this.uploadSuccess = false
+          this.uploadFailed = true
+        }
+        this.file = null
       }
       reader.readAsText(newFile)
     }
