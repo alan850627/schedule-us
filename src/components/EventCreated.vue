@@ -1,9 +1,15 @@
 <template>
-  <div class="event-created">
-    <h1>Event Created!</h1>
-    Copy this link to share with your friends:
-    <a :href="link">{{ baseURL }}{{ link }}</a>
-  </div>
+  <b-container class="new-event">
+    <b-row align-h="center">
+      <b-col cols="8">
+        <b-card class="text-center">
+          <h1>Event Created!</h1>
+          <p>Copy this link to share with your friends:
+          <br><a :href="link">{{ baseURL }}{{ link }}</a></p>
+       </b-card>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>

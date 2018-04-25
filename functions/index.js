@@ -1,11 +1,17 @@
 const firebase = require('firebase-admin')
 const functions = require('firebase-functions')
-const account = require('./auth/sendgrid.json')
-const sgMail = require('@sendgrid/mail')
+const account = require('./auth/gmail.json')
+const nodemailer = require('nodemailer');
 const app = firebase.initializeApp(functions.config().firebase)
 const firestore = app.firestore()
 
-sgMail.setApiKey(account.SENDGRID_API_KEY)
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: account.GMAIL_USERNAME,
+    pass: account.GMAIL_PASSWORD
+  }
+})
 
 exports.newEvent = functions.firestore.document('events/{eventId}').onCreate((snap, context) => {
   const hostName = snap.data().hostName
@@ -14,14 +20,9 @@ exports.newEvent = functions.firestore.document('events/{eventId}').onCreate((sn
   const description = snap.data().description
   const eventLink = `www.schedule-us-689d0.firebaseapp.com/#/event/${snap.data().eventId}`
 
-  console.log(hostName)
-  console.log(eventName)
-  console.log(hostEmail)
-  console.log(description)
-  console.log(eventLink)
   const msg = {
     to: hostEmail,
-    from: 'alan.yy.chen@gmail.com',
+    from: 'schedule-us <alan.yy.chen@gmail.com>',
     subject: 'schedule-us new event created!',
     text: `Hi ${hostName},
 
@@ -48,6 +49,7 @@ exports.newEvent = functions.firestore.document('events/{eventId}').onCreate((sn
               <br>Best, schedule-us team.
             </p>`,
   }
-  sgMail.send(msg)
-  return 0
+  return mailTransport.sendMail(msg).then(() => {
+    return console.log('New event email sent to:', hostEmail);
+  })
 })
