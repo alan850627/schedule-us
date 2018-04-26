@@ -133,10 +133,12 @@ export default {
       })
     },
     username (to, from) {
-      if (this.event.response[this.username]) {
-        this.userEmail = this.event.response[this.username].email
-      } else {
-        this.userEmail = ''
+      if (this.event.response) {
+        if (this.event.response[this.username]) {
+          this.userEmail = this.event.response[this.username].email
+        } else {
+          this.userEmail = ''
+        }
       }
     },
     file: function (newFile, old) {

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeSlot.vue has the expected html structure 1`] = `
+<div
+  class="time-slot noselect"
+  id="timeslot"
+  placement="rightbottom"
+  style="background: white;"
+  title="[yes]- 
+[maybe]- 
+[no]- "
+>
+  
+  12:00 AM
+
+</div>
+`;
