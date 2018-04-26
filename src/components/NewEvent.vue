@@ -9,7 +9,7 @@
             <b-form-input id="eventNameForm" type="text" v-model="eventName" required></b-form-input>
           </b-form-group>
           <b-form-group id="" label="Event Description:" label-for="eventDescriptionForm">
-            <b-form-input id="eventDescriptionForm" type="text" v-model="description" required></b-form-input>
+            <b-form-input id="eventDescriptionForm" type="text" v-model="description"></b-form-input>
           </b-form-group>
           <b-form-group id="" label="Possible Event Start Date:" label-for="eventStartDateForm">
             <b-form-input id="eventStartDateForm" type="date" v-model="start" required></b-form-input>
@@ -18,10 +18,10 @@
             <b-form-input id="eventEndDateForm" type="date" v-model="end" required></b-form-input>
           </b-form-group>
           <b-form-group id="" label="Your Name:" label-for="exampleInput3">
-            <b-form-input id="exampleInput3" type="text" v-model="hostName" required></b-form-input>
+            <b-form-input id="exampleInput3" type="text" v-model="hostName"></b-form-input>
           </b-form-group>
           <b-form-group id="" label="Email:" label-for="exampleInput4">
-            <b-form-input id="exampleInput4" type="email" v-model="hostEmail" required></b-form-input>
+            <b-form-input id="exampleInput4" type="email" v-model="hostEmail"></b-form-input>
           </b-form-group>
           <b-button @click="submit" variant="primary">Submit</b-button>
           <b-button @click="reset" variant="danger">Reset</b-button>

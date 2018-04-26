@@ -124,7 +124,20 @@ export default {
     '$route' (to, from) {
       // react to route changes...
       this.eventId = to.params.eventId
-      this.$bind('event', db.collection('events').doc(this.eventId))
+      this.$bind('event', db.collection('events').doc(this.eventId)).then((event) => {
+        if (event.response[this.username]) {
+          this.userEmail = event.response[this.username].email
+        } else {
+          this.userEmail = ''
+        }
+      })
+    },
+    username (to, from) {
+      if (this.event.response[this.username]) {
+        this.userEmail = this.event.response[this.username].email
+      } else {
+        this.userEmail = ''
+      }
     },
     file: function (newFile, old) {
       if (!newFile) {
@@ -158,7 +171,11 @@ export default {
 
   mounted () {
     this.eventId = this.$route.params.eventId
-    this.$bind('event', db.collection('events').doc(this.eventId))
+    this.$bind('event', db.collection('events').doc(this.eventId)).then((event) => {
+      if (event.response[this.username]) {
+        this.userEmail = event.response[this.username].email
+      }
+    })
   }
 }
 </script>

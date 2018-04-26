@@ -18,7 +18,7 @@ exports.newEvent = functions.firestore.document('events/{eventId}').onCreate((sn
   const eventName = snap.data().name
   const hostEmail = snap.data().hostEmail
   const description = snap.data().description
-  const eventLink = `www.schedule-us-689d0.firebaseapp.com/#/event/${snap.data().eventId}`
+  const eventLink = `https://schedule-us-689d0.firebaseapp.com/#/event/${context.params.eventId}`
 
   const msg = {
     to: hostEmail,
@@ -36,7 +36,7 @@ exports.newEvent = functions.firestore.document('events/{eventId}').onCreate((sn
           If you have any questions, reply to this email. 
           Best, schedule-us team.`,
     html: `<p>Hi ${hostName},</p>
-            <p>You've just created an event on <a href="www.schedule-us-689d0.firebaseapp.com">schedule-us</a> and here are the details:</p>
+            <p>You've just created an event on <a href="https://schedule-us-689d0.firebaseapp.com">schedule-us</a> and here are the details:</p>
             <ul>
               <li>Event Name: ${eventName}</li>
               <li>Description: ${description}</li>
@@ -50,6 +50,28 @@ exports.newEvent = functions.firestore.document('events/{eventId}').onCreate((sn
             </p>`,
   }
   return mailTransport.sendMail(msg).then(() => {
-    return console.log('New event email sent to:', hostEmail);
+    return console.log('New event email sent to:', hostEmail)
+  })
+})
+
+exports.newEmail = functions.firestore.document('emails/{emailId}').onCreate((snap, context) => {
+  const bcc = snap.data().bcc
+  const replyTo = snap.data().replyTo
+  const subject = snap.data().subject
+  const eventLink = `https://schedule-us-689d0.firebaseapp.com/#/event/${snap.data().eventId}`
+  const html = `<p>${snap.data().text}</p>
+                <p></p>
+                <p>For more information, visit <a href="${eventLink}">${eventLink}</a></p>`
+  const text = `${snap.data().text}; For more information, visit ${eventLink}`
+  const msg = {
+    bcc: bcc,
+    from: 'schedule-us <alan.yy.chen@gmail.com>',
+    replyTo: replyTo,
+    subject: subject,
+    text: text,
+    html: html
+  }
+  return mailTransport.sendMail(msg).then(() => {
+    return console.log('New event email sent to:', bcc)
   })
 })

@@ -14,7 +14,7 @@
         </b-col>
         <b-col sm="4">
           <b-button :href="`/#/edit-calendar/${eventId}`">Edit Your Response</b-button>
-          <b-button @click="sendEmail()">Email Everyone</b-button>
+          <b-button @click="emailModal=true">Email Everyone</b-button>
           <chat-box
             class="py-4"
             :id="event.chatId"
@@ -30,6 +30,29 @@
         </b-col>
       </b-row>
     </b-container>
+    <b-modal v-model="emailModal" id="emailModal" size="lg" title="Email Everyone">
+      <p>Warning: Emails only sent to those who opt in and provided emails in their responses.</p>
+      <b-input-group prepend="Your Email">
+        <b-form-input v-model="replyToEmail" type="email" placeholder="Enter your email" required></b-form-input>
+      </b-input-group>
+      <b-input-group prepend="Subject">
+        <b-form-input v-model="emailSubject" type="text" placeholder="Enter your email subject here" required></b-form-input>
+      </b-input-group>
+      <b-input-group prepend="Additional Recipients">
+        <b-form-input v-model="additionalEmails" type="text" placeholder="Separate emails by commas"></b-form-input>
+      </b-input-group>
+      <b-input-group prepend="Email content">
+        <b-form-textarea id="textarea1" v-model="emailContent" placeholder="We've decided to schedule our event at..." :rows="8" required></b-form-textarea>
+      </b-input-group>
+      <div slot="modal-footer" class="w-100">
+        <b-btn class="float-right px-3 ml-2" variant="primary" @click="sendEmail">
+          Send
+        </b-btn>
+        <b-btn class="float-right" @click="emailModal=false">
+          Cancel
+        </b-btn>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -63,6 +86,11 @@ export default {
     return {
       eventId: '',
       viewUsername: '',
+      emailSubject: '',
+      emailContent: '',
+      replyToEmail: '',
+      emailModal: false,
+      additionalEmails: '',
       event: () => { return {} }
     }
   },
@@ -72,7 +100,26 @@ export default {
       this.viewUsername = name
     },
     sendEmail: function () {
-
+      let emailRef = db.collection('emails').doc()
+      let resp = this.additionalEmails
+      Object.keys(this.event.response).forEach((user) => {
+        resp += `,${this.event.response[user].email}`
+      })
+      let emailObj = {
+        bcc: resp,
+        subject: this.emailSubject,
+        text: this.emailContent,
+        replyTo: this.replyToEmail,
+        eventId: this.eventId
+      }
+      emailRef.set(emailObj).then(() => {
+        this.emailSubject = ''
+        this.emailContent = ''
+        this.replyToEmail = ''
+        this.emailModal = false
+      }).catch((error) => {
+        alert('Problem with server... Try again. \nError: ' + error)
+      })
     }
   },
 
