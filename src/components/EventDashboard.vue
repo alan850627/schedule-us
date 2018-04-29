@@ -13,7 +13,7 @@
           </b-card>
         </b-col>
         <b-col sm="4">
-          <b-button :href="`/#/edit-calendar/${eventId}`">Edit Your Response</b-button>
+          <b-button :href="`/#/edit-calendar/${eventId}`">Edit Availability</b-button>
           <b-button @click="emailModal=true">Email Everyone</b-button>
           <chat-box
             class="py-4"
