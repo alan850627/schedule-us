@@ -15,18 +15,26 @@
         <b-col sm="4">
           <b-button :href="`/#/edit-calendar/${eventId}`">Edit Availability</b-button>
           <b-button @click="emailModal=true">Email Everyone</b-button>
+          <b-card class="my-4" >
+            <h2> {{event.name}} </h2>
+            <p> {{event.description}} </p>
+          </b-card>
+          <b-card title="Responses" class="my-4">
+            <span v-if="Object.keys(event.response).length > 0">
+              <div v-for="(res, name) in event.response" v-bind:key="name"
+                v-on:mouseover="updateView(name)" v-on:mouseleave="updateView('')">
+                {{ name }}
+              </div>
+            </span>
+            <span v-else>
+              none
+            </span>
+          </b-card>
           <chat-box
-            class="py-4"
+            class="my-4"
             :id="event.chatId"
             :username="username">
           </chat-box>
-
-          <b-card title="Responses">
-            <div v-for="(res, name) in event.response" v-bind:key="name"
-              v-on:mouseover="updateView(name)" v-on:mouseleave="updateView('')">
-              {{ name }}
-            </div>
-          </b-card>
         </b-col>
       </b-row>
     </b-container>
