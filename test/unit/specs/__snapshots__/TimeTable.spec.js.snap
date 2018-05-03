@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeTable.vue has the expected html structure 1`] = `
+<b-container
+  class="time-table"
+>
+  <b-pagination
+    align="center"
+    per-page="1"
+    size="md"
+    total-rows="1"
+  />
+   
+  <b-row
+    class="justify-content-md-center"
+  />
+</b-container>
+`;

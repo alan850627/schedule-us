@@ -72,41 +72,41 @@ export default {
 
   methods: {
     sendMessage: function () {
-      this.showDismissibleAlert = false
-      if (!this.username) {
-        this.showDismissibleAlert = true
-        return
-      }
-      if (!this.message.trim().length) {
-        return
-      }
-      this.chatBox[`${Date.now()}`] = {
-        username: this.username,
-        message: this.message
-      }
+      // this.showDismissibleAlert = false
+      // if (!this.username) {
+      //   this.showDismissibleAlert = true
+      //   return
+      // }
+      // if (!this.message.trim().length) {
+      //   return
+      // }
+      // this.chatBox[`${Date.now()}`] = {
+      //   username: this.username,
+      //   message: this.message
+      // }
 
-      let chatref = db.collection('chat-boxes').doc(this.id)
-      chatref.update(this.chatBox).then(() => {
-        console.log('Message sent!')
-        this.message = ''
-        let elem = this.$refs.chatScroll
-        elem.scrollTop = elem.scrollHeight
-      })
+      // let chatref = db.collection('chat-boxes').doc(this.id)
+      // chatref.update(this.chatBox).then(() => {
+      //   console.log('Message sent!')
+      //   this.message = ''
+      //   let elem = this.$refs.chatScroll
+      //   elem.scrollTop = elem.scrollHeight
+      // })
     }
   },
 
-  watch: {
-    numMessages: function (newnum, old) {
-      let elem = this.$refs.chatScroll
-      elem.scrollTop = elem.scrollHeight
-    }
-  },
+  // watch: {
+  //   numMessages: function (newnum, old) {
+  //     let elem = this.$refs.chatScroll
+  //     elem.scrollTop = elem.scrollHeight
+  //   }
+  // },
 
   mounted () {
-    this.$bind('chatBox', db.collection('chat-boxes').doc(this.id)).then((chatBox) => {
-      let elem = this.$refs.chatScroll
-      elem.scrollTop = elem.scrollHeight
-    })
+    // this.$bind('chatBox', db.collection('chat-boxes').doc(this.id)).then((chatBox) => {
+    //   let elem = this.$refs.chatScroll
+    //   elem.scrollTop = elem.scrollHeight
+    // })
   }
 }
 </script>

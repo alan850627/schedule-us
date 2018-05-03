@@ -135,13 +135,13 @@ export default {
     '$route' (to, from) {
       // react to route changes...
       this.eventId = to.params.eventId
-      this.$bind('event', db.collection('events').doc(this.eventId))
+      // this.$bind('event', db.collection('events').doc(this.eventId))
     }
   },
 
   mounted () {
     this.eventId = this.$route.params.eventId
-    this.$bind('event', db.collection('events').doc(this.eventId))
+    // this.$bind('event', db.collection('events').doc(this.eventId))
   }
 }
 </script>
