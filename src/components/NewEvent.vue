@@ -63,30 +63,30 @@ export default {
 
   methods: {
     submit: function () {
-      let startTimeStamp = moment(this.start, 'YYYY-MM-DD').valueOf()
-      let endTimeStamp = moment(this.end, 'YYYY-MM-DD').valueOf()
-      if (startTimeStamp > endTimeStamp) {
-        alert('Invalid date range!')
-        return
-      }
-      let numDays = Math.floor((endTimeStamp - startTimeStamp) / 86400000) + 1
-      let timeTableRef = this.makeTimeTable(startTimeStamp, 3600000, numDays)
-      let chatRef = this.makeChatBox()
-      let event = {
-        name: this.eventName,
-        description: this.description,
-        hostEmail: this.hostEmail,
-        hostName: this.hostName,
-        timeTableId: timeTableRef.id,
-        chatId: chatRef.id,
-        response: {}
-      }
-      let eventRef = db.collection('events').doc()
-      eventRef.set(event).then(() => {
-        this.$router.push(`/event-created/${eventRef.id}`)
-      }).catch((error) => {
-        alert('Problem with server... Try again. \nError: ' + error)
-      })
+      // let startTimeStamp = moment(this.start, 'YYYY-MM-DD').valueOf()
+      // let endTimeStamp = moment(this.end, 'YYYY-MM-DD').valueOf()
+      // if (startTimeStamp > endTimeStamp) {
+      //   alert('Invalid date range!')
+      //   return
+      // }
+      // let numDays = Math.floor((endTimeStamp - startTimeStamp) / 86400000) + 1
+      // let timeTableRef = this.makeTimeTable(startTimeStamp, 3600000, numDays)
+      // let chatRef = this.makeChatBox()
+      // let event = {
+      //   name: this.eventName,
+      //   description: this.description,
+      //   hostEmail: this.hostEmail,
+      //   hostName: this.hostName,
+      //   timeTableId: timeTableRef.id,
+      //   chatId: chatRef.id,
+      //   response: {}
+      // }
+      // let eventRef = db.collection('events').doc()
+      // eventRef.set(event).then(() => {
+      //   this.$router.push(`/event-created/${eventRef.id}`)
+      // }).catch((error) => {
+      //   alert('Problem with server... Try again. \nError: ' + error)
+      // })
     },
     reset: function () {
       /* Reset our form values */

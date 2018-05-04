@@ -90,94 +90,23 @@ export default {
       resetCalendarAtUpload: false,
       uploadFailed: false,
       uploadSuccess: false,
-      event: () => { return {} }
+      event: {}
     }
   },
 
   methods: {
     submit: function () {
-      if (this.username.length === 0) {
-        return
-      }
       this.event.response[this.username] = {
         timestamp: Date.now(),
         email: this.userEmail
       }
-      this.$refs.timeTable.submit()
       let eventRef = db.collection('events').doc(this.eventId)
-      eventRef.update(this.event).then(() => {
-        this.$router.push(`/event/${eventRef.id}`)
-      }).catch((error) => {
-        alert('Problem with server... Try again. \nError: ' + error)
-      })
     },
     clear: function () {
-      this.$refs.timeTable.clear()
     },
     cancel: function () {
       let eventRef = db.collection('events').doc(this.eventId)
-      this.$router.push(`/event/${eventRef.id}`)
     }
-  },
-
-  watch: {
-    '$route' (to, from) {
-      // react to route changes...
-      this.eventId = to.params.eventId
-      this.$bind('event', db.collection('events').doc(this.eventId)).then((event) => {
-        if (event.response[this.username]) {
-          this.userEmail = event.response[this.username].email
-        } else {
-          this.userEmail = ''
-        }
-      })
-    },
-    username (to, from) {
-      if (this.event.response) {
-        if (this.event.response[this.username]) {
-          this.userEmail = this.event.response[this.username].email
-        } else {
-          this.userEmail = ''
-        }
-      }
-    },
-    file: function (newFile, old) {
-      if (!newFile) {
-        return
-      }
-      if (this.resetCalendarAtUpload) {
-        this.$refs.timeTable.allGood()
-        this.resetCalendarAtUpload = false
-      }
-      let reader = new FileReader()
-      reader.onloadend = (e) => {
-        try {
-          let data = e.target.result
-          let ical = icalendar.parse_calendar(data)
-          ical.events().forEach((event) => {
-            let start = event.properties.DTSTART[0].value
-            let end = event.properties.DTEND[0].value
-            this.$refs.timeTable.markRange(start, end)
-          })
-          this.uploadFailed = false
-          this.uploadSuccess = true
-        } catch (err) {
-          this.uploadSuccess = false
-          this.uploadFailed = true
-        }
-        this.file = null
-      }
-      reader.readAsText(newFile)
-    }
-  },
-
-  mounted () {
-    this.eventId = this.$route.params.eventId
-    this.$bind('event', db.collection('events').doc(this.eventId)).then((event) => {
-      if (event.response[this.username]) {
-        this.userEmail = event.response[this.username].email
-      }
-    })
   }
 }
 </script>

@@ -99,7 +99,7 @@ export default {
       replyToEmail: '',
       emailModal: false,
       additionalEmails: '',
-      event: () => { return {} }
+      event: {}
     }
   },
 
@@ -108,39 +108,39 @@ export default {
       this.viewUsername = name
     },
     sendEmail: function () {
-      let emailRef = db.collection('emails').doc()
-      let resp = this.additionalEmails
-      Object.keys(this.event.response).forEach((user) => {
-        resp += `,${this.event.response[user].email}`
-      })
-      let emailObj = {
-        bcc: resp,
-        subject: this.emailSubject,
-        text: this.emailContent,
-        replyTo: this.replyToEmail,
-        eventId: this.eventId
-      }
-      emailRef.set(emailObj).then(() => {
-        this.emailSubject = ''
-        this.emailContent = ''
-        this.replyToEmail = ''
-        this.emailModal = false
-      }).catch((error) => {
-        alert('Problem with server... Try again. \nError: ' + error)
-      })
+      // let emailRef = db.collection('emails').doc()
+      // let resp = this.additionalEmails
+      // Object.keys(this.event.response).forEach((user) => {
+      //   resp += `,${this.event.response[user].email}`
+      // })
+      // let emailObj = {
+      //   bcc: resp,
+      //   subject: this.emailSubject,
+      //   text: this.emailContent,
+      //   replyTo: this.replyToEmail,
+      //   eventId: this.eventId
+      // }
+      // emailRef.set(emailObj).then(() => {
+      //   this.emailSubject = ''
+      //   this.emailContent = ''
+      //   this.replyToEmail = ''
+      //   this.emailModal = false
+      // }).catch((error) => {
+      //   alert('Problem with server... Try again. \nError: ' + error)
+      // })
     }
   },
 
   watch: {
-    '$route' (to, from) {
-      // react to route changes...
-      this.eventId = to.params.eventId
-      // this.$bind('event', db.collection('events').doc(this.eventId))
-    }
+    // '$route' (to, from) {
+    //   react to route changes...
+    //   this.eventId = to.params.eventId
+    //   this.$bind('event', db.collection('events').doc(this.eventId))
+    // }
   },
 
   mounted () {
-    this.eventId = this.$route.params.eventId
+    // this.eventId = this.$route.params.eventId
     // this.$bind('event', db.collection('events').doc(this.eventId))
   }
 }

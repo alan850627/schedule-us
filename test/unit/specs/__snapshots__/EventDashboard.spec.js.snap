@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EventDashboard.vue has the expected html structure 1`] = `
+<div
+  class="event-dashboard"
+>
+  <!---->
+   
+  <b-modal
+    id="emailModal"
+    size="lg"
+    title="Email Everyone"
+  >
+    <p>
+      Warning: Emails only sent to those who opt in and provided emails in their responses.
+    </p>
+     
+    <b-input-group
+      prepend="Your Email"
+    >
+      <b-form-input
+        placeholder="Enter your email"
+        required=""
+        type="email"
+      />
+    </b-input-group>
+     
+    <b-input-group
+      prepend="Subject"
+    >
+      <b-form-input
+        placeholder="Enter your email subject here"
+        required=""
+        type="text"
+      />
+    </b-input-group>
+     
+    <b-input-group
+      prepend="Additional Recipients"
+    >
+      <b-form-input
+        placeholder="Separate emails by commas"
+        type="text"
+      />
+    </b-input-group>
+     
+    <b-input-group
+      prepend="Email content"
+    >
+      <b-form-textarea
+        id="textarea1"
+        placeholder="We've decided to schedule our event at..."
+        required=""
+        rows="8"
+      />
+    </b-input-group>
+     
+    <div
+      class="w-100"
+      slot="modal-footer"
+    >
+      <b-btn
+        class="float-right px-3 ml-2"
+        variant="primary"
+      >
+        
+        Send
+      
+      </b-btn>
+       
+      <b-btn
+        class="float-right"
+      >
+        
+        Cancel
+      
+      </b-btn>
+    </div>
+  </b-modal>
+</div>
+`;

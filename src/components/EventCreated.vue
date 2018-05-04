@@ -41,15 +41,7 @@ export default {
   },
 
   watch: {
-    '$route' (to, from) {
-      // react to route changes...
-      this.eventId = to.params.eventId
-    }
   },
-
-  mounted () {
-    this.eventId = this.$route.params.eventId
-  }
 }
 </script>
 

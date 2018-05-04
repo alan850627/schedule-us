@@ -6,45 +6,45 @@
 </template>
 
 <script>
-// import moment from 'moment'
-// export default {
-//   name: 'ChatMessage',
+import moment from 'moment'
+export default {
+  name: 'ChatMessage',
 
-//   components: {
-//   },
+  components: {
+  },
 
-//   props: {
-//     username: {
-//       type: String,
-//       default: 'Anonymous'
-//     },
-//     message: {
-//       type: String,
-//       default: 'Default Message.'
-//     },
-//     timestamp: {
-//       type: String,
-//       default: `${Date.now()}`
-//     }
-//   },
+  props: {
+    username: {
+      type: String,
+      default: 'Anonymous'
+    },
+    message: {
+      type: String,
+      default: 'Default Message.'
+    },
+    timestamp: {
+      type: String,
+      default: '0'
+    }
+  },
 
-//   computed: {
-//     timeAgo: function () {
-//       return moment(Number(this.timestamp)).fromNow()
-//     }
-//   },
+  computed: {
+    timeAgo: function () {
+      return moment(Number(this.timestamp)).fromNow()
+    }
+  },
 
-//   data () {
-//     return {
-//     }
-//   },
+  data () {
+    return {
+    }
+  },
 
-//   methods: {
-//   },
+  methods: {
+  },
 
-//   mounted () {
-//   }
-// }
+  mounted () {
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

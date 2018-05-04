@@ -58,33 +58,11 @@ export default {
   computed: {
     daySeparated: function () {
       let columns = {}
-      // Object.keys(this.timeTable).forEach(timestamp => {
-      //   let timeslot = this.timeTable[timestamp]
-      //   let key = moment(timeslot.startTime).format('L')
-      //   if (columns[key]) {
-      //     columns[key].push(timeslot)
-      //   } else {
-      //     columns[key] = []
-      //     columns[key].push(timeslot)
-      //   }
-      // })
+      columns['day'] = this.viewSingle
       return columns
     },
     weekSeparated: function () {
       let weeks = [[]]
-      // let i = 0
-      // Object.keys(this.daySeparated).forEach((day) => {
-      //   let weekday = moment(this.daySeparated[day][0].startTime).isoWeekday()
-      //   weeks[i].push(this.daySeparated[day])
-      //   if (weekday === 6) {
-      //     i += 1
-      //     weeks.push([])
-      //   }
-      // })
-      // // Edge case where last day is a Saturday... a new entry would be added.
-      // if (weeks[i].length === 0) {
-      //   weeks.pop()
-      // }
       return weeks
     },
     weekDisplayed: function () {
@@ -102,51 +80,37 @@ export default {
 
   methods: {
     submit: function () {
-      // Object.keys(this.timeTable).forEach(timestamp => {
-      //   if (!this.timeTable[timestamp].response[this.username]) {
-      //     this.$set(this.timeTable[timestamp].response, this.username, 'no')
-      //   }
-      // })
-      // db.collection('time-table').doc(this.id).set(this.timeTable)
     },
     allGood: function () {
-      // Object.keys(this.timeTable).forEach(timestamp => {
-      //   this.$set(this.timeTable[timestamp].response, this.username, 'yes')
-      // })
+      Object.keys(this.timeTable).forEach(timestamp => {
+        // this.$set(this.timeTable[timestamp].response, this.username, 'yes')
+      })
     },
     markRange: function (start, end) {
-      // Object.keys(this.timeTable).forEach(timestamp => {
-      //   if (start <= timestamp && end >= timestamp) {
-      //     this.$set(this.timeTable[timestamp].response, this.username, 'no')
-      //   }
-      // })
     },
     clear: function () {
-      // Object.keys(this.timeTable).forEach(timestamp => {
-      //   this.$set(this.timeTable[timestamp].response, this.username, 'no')
-      // })
     },
     getDate: function (timestamp) {
-      // return moment(timestamp).format('MMMM DD')
+      return moment(timestamp).format('MMMM DD')
     },
     getDayOfWeek: function (timestamp) {
       let str = ''
-      // let day = moment(timestamp).isoWeekday()
-      // if (day === 1) {
-      //   str = 'Mon'
-      // } else if (day === 2) {
-      //   str = 'Tues'
-      // } else if (day === 3) {
-      //   str = 'Wed'
-      // } else if (day === 4) {
-      //   str = 'Thur'
-      // } else if (day === 5) {
-      //   str = 'Fri'
-      // } else if (day === 6) {
-      //   str = 'Sat'
-      // } else if (day === 7) {
-      //   str = 'Sun'
-      // }
+      let day = moment(timestamp).isoWeekday()
+      if (day === 1) {
+        str = 'Mon'
+      } else if (day === 2) {
+        str = 'Tues'
+      } else if (day === 3) {
+        str = 'Wed'
+      } else if (day === 4) {
+        str = 'Thur'
+      } else if (day === 5) {
+        str = 'Fri'
+      } else if (day === 6) {
+        str = 'Sat'
+      } else if (day === 7) {
+        str = 'Sun'
+      }
       return str
     }
   },
